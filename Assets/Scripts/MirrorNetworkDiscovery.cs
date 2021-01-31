@@ -13,9 +13,7 @@ namespace Mirror.Discovery
         readonly Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
         Vector2 scrollViewPos = Vector2.zero;
 
-      //  public NetworkDiscovery networkDiscovery;
-
-        public GameObject cube;
+      
         public Button create;
         public Button find;
         public Canvas results;
@@ -76,7 +74,6 @@ namespace Mirror.Discovery
         void Connect(ServerResponse info)
         {
             NetworkManager.singleton.StartClient(info.uri);
-            cube = Instantiate(cube);
             looking = false;
         }
 
@@ -96,11 +93,8 @@ namespace Mirror.Discovery
         public void onClickCreate()
         {
             discoveredServers.Clear();
-            NetworkManager.singleton.StartServer();
-            NetworkManager.singleton.StartClient();
+            NetworkManager.singleton.StartHost();
             networkDiscovery.AdvertiseServer();
-            Button Connected = Instantiate(create, results.transform);
-            //Connected.transform.SetParent(results.transform);
 
             Debug.Log($"Created-");
         }
