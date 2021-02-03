@@ -14,7 +14,7 @@ namespace Mirror.Discovery
 
         public NetworkDiscovery networkDiscovery;
 
-        
+
 
 #if UNITY_EDITOR
         void OnValidate()

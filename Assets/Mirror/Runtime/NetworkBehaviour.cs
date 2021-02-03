@@ -1,6 +1,6 @@
+using Mirror.RemoteCalls;
 using System;
 using System.Collections.Generic;
-using Mirror.RemoteCalls;
 using UnityEngine;
 
 namespace Mirror

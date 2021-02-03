@@ -1,5 +1,5 @@
-using System;
 using Mirror.Cloud.ListServerService;
+using System;
 using UnityEngine;
 
 namespace Mirror.Cloud.Example

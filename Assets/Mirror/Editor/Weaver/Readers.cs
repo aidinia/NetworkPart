@@ -1,8 +1,8 @@
-using System;
-using System.Collections.Generic;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
 using Mono.CecilX.Rocks;
+using System;
+using System.Collections.Generic;
 
 namespace Mirror.Weaver
 {

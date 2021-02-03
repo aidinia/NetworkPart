@@ -1,5 +1,5 @@
-using System;
 using Mono.CecilX;
+using System;
 
 namespace Mirror.Weaver
 {
@@ -125,7 +125,7 @@ namespace Mirror.Weaver
 
             registerCommandDelegateReference = Resolvers.ResolveMethod(RemoteCallHelperType, currentAssembly, "RegisterCommandDelegate");
             registerRpcDelegateReference = Resolvers.ResolveMethod(RemoteCallHelperType, currentAssembly, "RegisterRpcDelegate");
-            
+
             TypeReference unityDebug = Import(typeof(UnityEngine.Debug));
             // these have multiple methods with same name, so need to check parameters too
             logErrorReference = Resolvers.ResolveMethod(unityDebug, currentAssembly, (md) =>

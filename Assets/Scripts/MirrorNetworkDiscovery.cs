@@ -11,11 +11,11 @@ namespace Mirror.Discovery
     public class MirrorNetworkDiscovery : NetworkDiscoveryHUD
     {
         readonly Dictionary<long, ServerResponse> discoveredServers = new Dictionary<long, ServerResponse>();
-        Vector2 scrollViewPos = Vector2.zero;
-
-      
+        NetworkManager manager;
         public Button create;
         public Button find;
+        private Button thisResult;
+        private ServerResponse infos;
         public Canvas results;
         bool looking = false;
 
@@ -31,12 +31,6 @@ namespace Mirror.Discovery
         }
 #endif
 
-        //public MirrorNetworkDiscovery(Button c, Button f, Canvas r)
-        //{
-        //    create = c;
-        //    find = f;
-        //    results = r;
-        //}
 
         void OnGUI()
         {
@@ -47,33 +41,51 @@ namespace Mirror.Discovery
                 return;
 
             if (!NetworkClient.isConnected && !NetworkServer.active && !NetworkClient.active)
+            {
                 if (looking)
+                {
                     DrawGUI();
+                }
+            }
         }
 
+        private void Awake()
+        {
+            manager = GetComponent<NetworkManager>();
+        }
         void Start()
         {
             create.onClick.AddListener(onClickCreate);
             find.onClick.AddListener(onClickFind);
+            // thisResult.onClick.AddListener(onClickConnect);
+
+
         }
 
         void DrawGUI()
         {
-          
+            Debug.Log($"Looking-");
             foreach (ServerResponse info in discoveredServers.Values)
             {
-                Button thisResult = Instantiate(create, results.transform);
+
+                thisResult = Instantiate(create, (find.transform.position - new Vector3(0, 10, 0)), find.transform.rotation, results.transform);
                 thisResult.GetComponentInChildren<Text>().text = info.EndPoint.Address.ToString();
+                infos = info;
                 Debug.Log(info.EndPoint.Address.ToString());
                 if (thisResult)
+                {
                     Connect(info);
+                    Debug.Log($"Connected to {info}");
+                }
             }
-
         }
 
         void Connect(ServerResponse info)
         {
             NetworkManager.singleton.StartClient(info.uri);
+            find.interactable = false;
+            Debug.Log($"Connected to {info}");
+
             looking = false;
         }
 
@@ -83,20 +95,34 @@ namespace Mirror.Discovery
             discoveredServers[info.serverId] = info;
         }
 
-        public void onClickFind() {
+        public void onClickFind()
+        {
             discoveredServers.Clear();
             networkDiscovery.StartDiscovery();
-            Debug.Log($"Looking-");
             looking = true;
-            DrawGUI();
+        }
+        public void onClickConnect()
+        {
+
+
         }
         public void onClickCreate()
         {
             discoveredServers.Clear();
-            NetworkManager.singleton.StartHost();
+
+            manager.StartHost();
             networkDiscovery.AdvertiseServer();
+            create.GetComponentInChildren<Text>().text = "Stop server";
+            create.onClick.RemoveAllListeners();
+            create.onClick.AddListener(onClickStop);
 
             Debug.Log($"Created-");
         }
+
+        public void onClickStop()
+        {
+            manager.StopHost();
+        }
+
     }
 }

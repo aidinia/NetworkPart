@@ -1,9 +1,9 @@
 //#if MIRROR <- commented out because MIRROR isn't defined on first import yet
+using Mirror;
 using System;
 using System.Linq;
 using System.Net;
 using UnityEngine;
-using Mirror;
 
 namespace kcp2k
 {
@@ -44,7 +44,7 @@ namespace kcp2k
             if (debugLog)
                 Log.Info = Debug.Log;
             else
-                Log.Info = _ => {};
+                Log.Info = _ => { };
             Log.Warning = Debug.LogWarning;
             Log.Error = Debug.LogError;
 
@@ -136,7 +136,7 @@ namespace kcp2k
         public override void ServerStop() => server.Stop();
 
         // common
-        public override void Shutdown() {}
+        public override void Shutdown() { }
 
         // max message size
         public override int GetMaxPacketSize(int channelId = Channels.DefaultReliable) => KcpConnection.MaxMessageSize;

@@ -1,8 +1,8 @@
 // finds all readers and writers and register them
-using System;
-using System.Linq;
 using Mono.CecilX;
 using Mono.CecilX.Cil;
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;

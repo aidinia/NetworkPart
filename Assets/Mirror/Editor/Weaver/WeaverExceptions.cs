@@ -1,5 +1,5 @@
-using System;
 using Mono.CecilX;
+using System;
 
 namespace Mirror.Weaver
 {

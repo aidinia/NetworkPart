@@ -276,20 +276,20 @@ namespace kcp2k
                 switch (state)
                 {
                     case KcpState.Connected:
-                    {
-                        TickConnected(time);
-                        break;
-                    }
+                        {
+                            TickConnected(time);
+                            break;
+                        }
                     case KcpState.Authenticated:
-                    {
-                        TickAuthenticated(time);
-                        break;
-                    }
+                        {
+                            TickAuthenticated(time);
+                            break;
+                        }
                     case KcpState.Disconnected:
-                    {
-                        // do nothing while disconnected
-                        break;
-                    }
+                        {
+                            // do nothing while disconnected
+                            break;
+                        }
                 }
             }
             catch (SocketException exception)

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Mirror.Examples.NetworkRoom
 {
-    internal class Spawner: MonoBehaviour
+    internal class Spawner : MonoBehaviour
     {
         internal static void InitialSpawn()
         {

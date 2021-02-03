@@ -57,7 +57,7 @@ namespace kcp2k
                 }
             }
             // this is fine, the socket might have been closed in the other end
-            catch (SocketException) {}
+            catch (SocketException) { }
         }
 
         protected override void Dispose()
