@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class LobbyManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class LobbyManager : MonoBehaviour
     {
 
         Debug.Log($"Click");
-        roomName = nameInput.text;
+        roomName = nameInput.text == null? PhotonNetwork.CountOfRooms.ToString() : nameInput.text;
         PhoNetworkManager.instance.CreateRoom(roomName);
     }
     public void OnClickJoinRoom()

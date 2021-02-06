@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4e136552a18503458872ddb76e4e4a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  networkDiscovery: {fileID: 1553297178}
+  networkDiscovery: {fileID: 0}
   create: {fileID: 2113592244}
   find: {fileID: 1832816424}
   results: {fileID: 935526320}

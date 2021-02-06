@@ -13,7 +13,13 @@ public class RoomManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PhotonNetwork.Instantiate(player.name, player.transform.position, player.transform.rotation);
+        var playersCanvas = GameObject.Find("Players").transform;
+        var currentPlayers = PhotonNetwork.CurrentRoom.PlayerCount;
+        var placeInX = ((playersCanvas.GetComponent<RectTransform>().rect.width / 4)+ player.GetComponent<RectTransform>().rect.width/2)*currentPlayers;
+        Vector3 slot = new Vector3 (placeInX, playersCanvas.position.y, playersCanvas.position.z);
+        var thisPlayer = PhotonNetwork.Instantiate(player.name, slot, playersCanvas.rotation);
+
+        thisPlayer.transform.parent = playersCanvas;
         roomName.text = PhotonNetwork.CurrentRoom.Name;
     }
 
