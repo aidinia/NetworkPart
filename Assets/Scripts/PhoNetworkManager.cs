@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using UnityEditor;
 
 public class PhoNetworkManager : MonoBehaviourPunCallbacks
 {
     public static PhoNetworkManager instance;
-
-    public Photon.Realtime.Room currentRoom;
+    public GameObject RoomLobby;
+    public Button create;
+    public Button find;
 
      void Awake()
     {
@@ -36,6 +38,8 @@ public class PhoNetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log($"Join Lobby");
+        create.interactable = true;
+        find.interactable = true;
     }
 
     public override void OnCreatedRoom()
@@ -43,18 +47,20 @@ public class PhoNetworkManager : MonoBehaviourPunCallbacks
         //        base.OnCreatedRoom();
         Debug.Log($"Connected to Room {PhotonNetwork.CurrentRoom.Name}");
 
-    ChangeScene("Lobby");
+        ChangeMenu();
     }
     public override void OnJoinedRoom()
     {
-        ChangeScene("Lobby");
 
+        Debug.Log($"Connected to Room {PhotonNetwork.CurrentRoom.Name}");
+        ChangeMenu();
     }
 
     public void CreateRoom(string name)
     {
         PhotonNetwork.CreateRoom(name);
         Debug.Log($"Created room name is {name}");
+
     }
 
     public void JoindRoom(string name)
@@ -62,9 +68,12 @@ public class PhoNetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(name);
     }
 
-    public void ChangeScene(string name)
+    public void ChangeMenu()
     {
-        PhotonNetwork.LoadLevel(name);
-       
+        RoomLobby.SetActive(true);
+        LobbyManager.CreatePlayer();
+        GameObject.Find("EnterMenu").SetActive(false);
+        
+
     }
 }
