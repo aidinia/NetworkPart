@@ -62,7 +62,7 @@ public class PlayerMove : MonoBehaviourPun
             }
         }
 
-        if(Input.GetKeyDown(0) == true)
+        if (Input.GetKey("up"))     
         {
             if (photonView.IsMine)
             {
